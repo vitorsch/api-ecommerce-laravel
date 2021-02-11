@@ -14,7 +14,7 @@ class PaymentTypeController extends Controller
      */
     public function index()
     {
-        //
+        return PaymentType::all();
     }
 
     /**
@@ -35,7 +35,15 @@ class PaymentTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        $paymentType = PaymentType::create([
+            'name' => $request->input('name')
+        ]);
+
+        return $paymentType;
     }
 
     /**
@@ -69,7 +77,36 @@ class PaymentTypeController extends Controller
      */
     public function update(Request $request, PaymentType $paymentType)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+        
+        $payment = (PaymentType::find($paymentType->id));
+        if(!$payment) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Usuário do id'. $paymentType->id .'não encontrado'
+            ]);
+        };
+        $update = $payment->fill([
+            'name' => $request->name
+            ])
+        ->save();
+        
+        // $paymentType->name = $request->name;
+
+        // $payment = $paymentType;
+        // $payment::set([
+        //     'name' => $request->name,
+        // ]);
+            // ->where('name', $request->name);
+            // ->update(['name' => $request->name]);
+    
+        // $paymentType = PaymentType::create([
+        //     'name' => $request->input('name')
+        // ]);
+
+        return $update;
     }
 
     /**

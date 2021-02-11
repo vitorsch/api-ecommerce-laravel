@@ -14,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function() {
+    return 'Laravel - API Ecommerce';
+});
+
+Route::put('/payment-types/{paymentType}', 'App\Http\Controllers\PaymentTypeController@update');
+Route::get('/payment-types', 'App\Http\Controllers\PaymentTypeController@index');
+Route::post('/payment-types', 'App\Http\Controllers\PaymentTypeController@store');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
