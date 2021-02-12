@@ -11,6 +11,7 @@ class Order extends Model
 
     protected $fillable = [
         'id',
+        'cart_id', // temporário para testes
         'address_id',
         'billing_address_id',
         'payment_type_id',

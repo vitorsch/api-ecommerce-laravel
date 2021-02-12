@@ -18,6 +18,10 @@ Route::get('/', function() {
     return 'Laravel - API Ecommerce';
 });
 
+// Orders Routes
+Route::post('/orders', 'App\Http\Controllers\OrderController@store');
+Route::get('/orders', 'App\Http\Controllers\OrderController@index');
+Route::put('/orders/{order}', 'App\Http\Controllers\OrderController@update');
 
 // Products Routes
 Route::post('/products', 'App\Http\Controllers\ProductController@store');
