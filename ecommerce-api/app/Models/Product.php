@@ -12,6 +12,7 @@ class Product extends Model
     protected $fillable = [
         'name',
         'description',
-        'price'
+        'price',
+        'user_id'// temporário para testes
     ];
 }

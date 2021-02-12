@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return Product::all();
     }
 
     /**
@@ -35,7 +35,23 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'user_id' => 'required',
+
+        ]);
+
+        $product = Product::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
+            'user_id' => $request->input('user_id')
+
+        ]);
+
+        return $product;
     }
 
     /**
@@ -69,7 +85,23 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+
+        $productUpdate = Product::find($product->id);
+        if (!$productUpdate) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Produto com id ' . $product->id . ' não encontrado'
+            ]);
+        };
+        $update = $product->fill([
+            'name' => $request->input('name') ? 
+                $request->input('name') : $product->name,
+            'description' => $request->input('description') ? 
+                $request->input('description') : $product->description,
+            'price' => $request->input('price') ?
+                $request->input('price') : $product->price,
+        ])->save();
+        return $update;
     }
 
     /**

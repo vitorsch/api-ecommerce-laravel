@@ -18,6 +18,14 @@ Route::get('/', function() {
     return 'Laravel - API Ecommerce';
 });
 
+
+// Products Routes
+Route::post('/products', 'App\Http\Controllers\ProductController@store');
+Route::get('/products', 'App\Http\Controllers\ProductController@index');
+Route::put('/products/{product}', 'App\Http\Controllers\ProductController@update');
+
+
+// PaymentType Routes
 Route::put('/payment-types/{paymentType}', 'App\Http\Controllers\PaymentTypeController@update');
 Route::get('/payment-types', 'App\Http\Controllers\PaymentTypeController@index');
 Route::post('/payment-types', 'App\Http\Controllers\PaymentTypeController@store');
